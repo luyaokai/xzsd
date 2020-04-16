@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.goodsclassify.dao.GoodsClassifyDao">
+
+    <!--新增商品分类-->
+    <insert id="saveGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
+        insert into t_ysy_goodsclassify
+        (classify_code,
+         classify_name,
+         classify_father,
+         classify_comment,
+         is_deleted,
+         create_user,
+         create_time,
+         update_user,
+         update_time,
+         version)
+        values
+           (#{classifyCode},
+            #{classifyName},
+            #{classifyFather},
+            #{classifyComment},
+            #{isDeleted},
+            #{createUser1},
+            now(),
+            #{updateUser1},
+            now(),
+            0)
+    </insert>
+
+    <!--删除商品分类-->
+    <update id="deleteGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
+        update t_ysy_goodsclassify
+        set
+            is_deleted = 1,
+            update_time= now(),
+            update_user  = #{userId},
+            version = version + 1
+        where classify_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改用户信息-->
+    <update id="updateGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
+        update t_ysy_goodsclassify
+        set
+            classify_name    = #{classifyName},
+            classify_father  = #{classifyFather},
+            classify_comment = #{classifyComment},
+            update_time  = now(),
+            update_user  = #{updateUser1},
+            version      = version + 1
+        where classify_code = #{classifyCode}
+          and version = #{version}
+    </update>
+
+    <!--获取商品分类信息-->
+    <select id="getGoodsClassifyByClassifyCode" parameterType="java.lang.String" resultType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
+        select
+            classify_code    classifyCode,
+            classify_name    classifyName,
+            classify_father  classifyFather,
+            classify_comment classifyComment,
+            version
+        from t_ysy_goodsclassify
+        where classify_code = #{classifyCode}
+        and is_deleted = 0
+    </select>
+
+    <!--商品分类列表-->
+    <select id="listGoodsClassify"  resultMap="goodsClassifyMap">
+        select
+        a.classify_code classifyCode0,
+        a.classify_name classifyName0,
+        a.version version0,
+        b.classify_code classifyCode1,
+        b.classify_name classifyName1,
+        b.version version1
+        from t_ysy_goodsclassify a, t_ysy_goodsclassify b
+        where a.is_deleted = 0
+        and a.classify_code = b.classify_father
+        and b.is_deleted = 0
+        order by a.create_time desc
+    </select>
+    <resultMap id="goodsClassifyMap" type="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfoVo">
+        <id property="classifyCode" column="classifyCode0"/>
+        <result property="classifyName" column="classifyName0"/>
+        <result property="version" column="version0"/>
+        <collection property="secondList" ofType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfoVO1">
+            <id property="classifyCode" column="classifyCode1"/>
+            <result property="classifyName" column="classifyName1"/>
+            <result property="version" column="version1"/>
+        </collection>
+    </resultMap>
+
+</mapper>

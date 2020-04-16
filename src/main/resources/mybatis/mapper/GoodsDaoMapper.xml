@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.goods.dao.GoodsDao">
+
+    <!--统计用户账号数量-->
+    <select id="countGoodsCode" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="int">
+        select count(goods_code)
+        from t_ysy_goods
+        where is_deleted = 0
+        and goods_code= #{goodsCode}
+    </select>
+
+    <!--新增商品-->
+    <insert id="saveGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        insert into t_ysy_goods
+        (goods_code,
+         goods_name,
+         pricing,
+         sell_price,
+         sell_sum,
+         first_code,
+         second_code,
+         goods_message,
+         goods_press,
+         goods_author,
+         goods_state,
+         image_path,
+         sell_time,
+         see_sum,
+         merchant_name,
+         goods_sum,
+         goods_introduce,
+         goods_isbn,
+         goods_cost,
+         is_deleted,
+         create_user,
+         create_time,
+         update_user,
+         update_time,
+         version)
+        values
+           (#{goodsCode},
+            #{goodsName},
+            #{pricing},
+            #{sellPrice},
+            #{sellSum},
+            #{firstCode},
+            #{secondCode},
+            #{goodsMessage},
+            #{goodsPress},
+            #{goodsAuthor},
+            #{goodsState},
+            #{imagePath},
+            #{sellTime},
+            #{seeSum},
+            #{merchantName},
+            #{goodsSum},
+            #{goodsIntroduce},
+            #{goodsIsbn},
+            #{goodsCost},
+            #{isDeleted},
+            #{createUser1},
+            now(),
+            #{updateUser1},
+            now(),
+            0)
+    </insert>
+
+    <!--商品列表-->
+    <select id="listGoodsByPage" parameterType="com.xzsd.pc.goods.entity.GoodsInfoVO" resultType="com.xzsd.pc.goods.entity.GoodsInfoVO">
+        select
+        a.goods_code goodsCode,
+        a.goods_name goodsName,
+        a.pricing,
+        a.sell_price sellPrice,
+        a.sell_sum sellSum,
+        b.classify_name firstName,
+        c.classify_name secondName,
+        a.goods_message goodsMessage,
+        a.goods_state  goodsState,
+        a.sell_time sellTime,
+        a.see_sum seeSum,
+        a.merchant_name merchantName,
+        a.goods_sum goodsSum,
+        a.goods_introduce goodsIntroduce,
+        a.goods_isbn goodsIsbn,
+        a.is_deleted isDeleted,
+        a.create_user createUser1,
+        a.create_time createTime1,
+        a.update_user updateUser1,
+        a.update_time updateTime1,
+        a.version
+        from t_ysy_goods a, t_ysy_goodsclassify b,t_ysy_goodsclassify c
+        where a.is_deleted = 0
+        and a.first_code = b.classify_code
+        and a.second_code = c.classify_code
+        <if test="goodsName != null and goodsName != ''">
+            and goods_name like concat('%', #{goodsName}, '%')
+        </if>
+        <if test="goodsPress != null and goodsPress != ''">
+            and goods_press like concat('%', #{goodsPress}, '%')
+        </if>
+        <if test="goodsAuthor != null and goodsAuthor != ''">
+            and goods_author like concat('%', #{goodsAuthor}, '%')
+        </if>
+        <if test="goodsMessage != null and goodsMessage != ''">
+            and goods_message like concat('%', #{goodsMessage}, '%')
+        </if>
+        order by a.create_time desc
+    </select>
+
+    <!--删除商品-->
+    <update id="deleteGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_ysy_goods
+        set
+            is_deleted = 1,
+            update_time= now(),
+            update_user  = #{userId},
+            version = version + 1
+        where goods_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改商品信息-->
+    <update id="updateGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_ysy_goods
+        set
+            goods_name   = #{goodsName},
+            pricing      = #{pricing},
+            sell_price   = #{sellPrice},
+            sell_sum     = #{sellSum},
+            first_code   = #{firstCode},
+            second_code  = #{secondCode},
+            goods_message= #{goodsMessage},
+            goods_state  = #{goodsState},
+            image_path   = #{imagePath},
+            sell_time    = #{sellTime},
+            see_sum      = #{seeSum},
+            merchant_name= #{merchantName},
+            goods_sum    = #{goodsSum},
+            goods_introduce = #{goodsIntroduce},
+            goods_isbn   = #{goodsIsbn},
+            update_time  = now(),
+            update_user  = #{updateUser1},
+            version      = version + 1
+        where goods_code = #{goodsCode}
+          and version = #{version}
+    </update>
+
+    <!--获取商品信息-->
+    <select id="getGoodsByGoodsCode" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsInfo">
+        select
+            a.goods_code goodsCode,
+            a.goods_name goodsName,
+            a.pricing,
+            a.sell_price sellPrice,
+            a.sell_sum sellSum,
+            a.first_code firstCode,
+            b.classify_name firstName,
+            a.second_code secondCode,
+            c.classify_name  secondName,
+            a.goods_message goodsMessage,
+            a.goods_state  goodsState,
+            a.image_path   image_path,
+            a.sell_time sellTime,
+            a.see_sum seeSum,
+            a.merchant_name merchantName,
+            a.goods_sum goodsSum,
+            a.goods_introduce goodsIntroduce,
+            a.goods_isbn goodsIsbn,
+            a.version
+        from t_ysy_goods a,t_ysy_goodsclassify b, t_ysy_goodsclassify c
+        where a.goods_code = #{goodsCode}
+        and a.first_code = b.classify_code
+        and a.second_code = c.classify_code
+        and a.is_deleted = 0
+    </select>
+
+    <!--商品一二级分类查询-->
+    <select id="listGoodsByClassifyFather" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo" resultType="com.xzsd.pc.goods.entity.GoodsInfoVO1">
+        select
+            classify_code classifyCode,
+            classify_name classifyName,
+            is_deleted isDeleted,
+            create_user createUser1,
+            create_time createTime1,
+            update_user updateUser1,
+            update_time updateTime1,
+            version
+        from t_ysy_goodsclassify
+        where is_deleted = 0
+        and classify_father = #{classifyCode}
+    </select>
+
+    <!--修改商品状态-->
+    <update id="updateGoodsState" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
+        update t_ysy_goods
+        set
+            goods_state = #{goodsState},
+            update_time  = now(),
+            update_user  = #{userId},
+            version = version + 1
+        where goods_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>
