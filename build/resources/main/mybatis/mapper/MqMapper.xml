@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activcemq.dao.MqDao">
+<!--    &lt;!&ndash;新增用户&ndash;&gt;-->
+<!--    <insert id="saveMessage" parameterType="com.activcemq.entity.MqInfo">-->
+<!--        insert into t_ysy_message-->
+<!--        (code,-->
+<!--         content,-->
+<!--         create_time-->
+<!--         )-->
+<!--        values-->
+<!--           (#{code},-->
+<!--            #{content},-->
+<!--            now())-->
+<!--    </insert>-->
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.slideshow.dao.SlideshowDao">
+
+    <!--统计轮播图序号数量-->
+    <select id="countSlideshowSort" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo" resultType="int">
+        select count(slideshow_sort)
+        from t_ysy_slideshow
+        where is_deleted = 0
+        and slideshow_sort = #{slideshowSort}
+    </select>
+
+    <!--新增轮播图-->
+    <insert id="saveSlideshow" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
+        insert into t_ysy_slideshow
+        (slideshow_code,
+         slideshow_state,
+         work_time,
+         dead_time,
+         slideshow_sort,
+         goods_code,
+         image_path,
+         is_deleted,
+         create_user,
+         create_time,
+         update_user,
+         update_time,
+         version)
+        values
+           (#{slideshowCode},
+            #{slideshowState},
+            #{workTime},
+            #{deadTime},
+            #{slideshowSort},
+            #{goodsCode},
+            #{imagePath},
+            #{isDeleted},
+            #{createUser1},
+            now(),
+            #{updateUser1},
+            now(),
+            0)
+    </insert>
+
+    <!--轮播图列表-->
+    <select id="listSlideshowByPage" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfoVO" resultType="com.xzsd.pc.slideshow.entity.SlideshowInfoVO">
+        select
+        slideshow_code slideshowCode,
+        slideshow_state slideshowState,
+        work_time workTime,
+        dead_time deadTime,
+        slideshow_sort slideshowSort,
+        image_path  imagePath,
+        is_deleted isDeleted,
+        create_time createTime1,
+        create_user createUser1,
+        update_time updateTime1,
+        update_user updateUser1,
+        version
+        from t_ysy_slideshow
+        where is_deleted = 0
+        <if test="slideshowState != null and slideshowState != ''">
+            and slideshow_state = #{slideshowState}
+        </if>
+        order by slideshow_sort asc
+    </select>
+
+    <!--删除轮播图-->
+    <update id="deleteSlideshow" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
+        update t_ysy_slideshow
+        set
+            is_deleted = 1,
+            update_time= now(),
+            update_user  = #{userId},
+            version = version + 1
+        where slideshow_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改轮播图状态-->
+    <update id="updateSlideshowState" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
+        update t_ysy_slideshow
+        set
+            slideshow_state = #{slideshowState},
+            update_time  = now(),
+            update_user  = #{userId},
+            version = version + 1
+        where slideshow_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--获取轮播图信息-->
+    <select id="getSlideshowBySlideshowCode" parameterType="java.lang.String" resultType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
+        select
+            slideshow_code slideshowCode,
+            slideshow_state slideshowState,
+            work_time workTime,
+            dead_time deadTime,
+            slideshow_sort slideshowSort,
+            goods_code goodsCode,
+            inmage_path imagePath,
+            version
+        from t_ysy_slideshow
+        where slideshow_code = #{slideshowCode}
+        and is_deleted = 0
+    </select>
+
+    <!--轮播图获取商品列表-->
+    <select id="listGoodsByPage" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfoVO1" resultType="com.xzsd.pc.slideshow.entity.SlideshowInfoVO1">
+        select
+        a.goods_code goodsCode,
+        a.goods_name goodsName,
+        b.classify_name firstName,
+        c.classify_name secondName,
+        a.goods_state  goodsState,
+        a.is_deleted isDeleted,
+        a.create_user createUser1,
+        a.create_time createTime1,
+        a.update_user updateUser1,
+        a.update_time updateTime1,
+        a.version
+        from t_ysy_goods a, t_ysy_goodsclassify b,t_ysy_goodsclassify c
+        where a.is_deleted = 0
+        and a.first_code = b.classify_code
+        and a.second_code = c.classify_code
+        and a.goods_state = 0
+        <if test="goodsName != null and goodsName != ''">
+            and a.goods_name like concat('%', #{goodsName}, '%')
+        </if>
+        <if test="goodsCode != null and goodsCode != ''">
+            and a.goods_code like concat('%', #{goodsCode}, '%')
+        </if>
+        order by a.create_time desc
+    </select>
+</mapper>
