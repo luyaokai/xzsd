@@ -16,6 +16,12 @@ import java.util.List;
 @Mapper
 public interface SlideshowDao {
     /**
+     * 统计轮播图商品编号数量
+     * @param slideshowInfo 轮播图信息
+     * @return
+     */
+    int countGoodsCode(SlideshowInfo slideshowInfo);
+    /**
      * 统计轮播图排序数量
      * @param slideshowInfo 轮播图信息
      * @return
@@ -42,7 +48,7 @@ public interface SlideshowDao {
      * @param userId 更新人
      * @return
      */
-    int deleteSlideshow(List<String> listCode, @Param("userId") String userId);
+    int deleteSlideshow(@Param("listCode") List<String> listCode, @Param("userId") String userId);
 
     /**
      * 修改轮播图状态

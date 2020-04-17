@@ -50,7 +50,7 @@ public class UserInfoVO {
     /**
      * 角色
      */
-    private int role;
+    private String role;
 
     public int getPageSize() {
         return pageSize;
@@ -124,11 +124,9 @@ public class UserInfoVO {
         this.email = email;
     }
 
-    public int getRole() { return role; }
+    public String getRole() { return role; }
 
-    public void setRole(int role) {this.role=role; }
-
-
+    public void setRole(String role) {this.role=role; }
 
     public int getSex() {
         return sex;

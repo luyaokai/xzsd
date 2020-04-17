@@ -106,6 +106,9 @@
         <if test="goodsMessage != null and goodsMessage != ''">
             and goods_message like concat('%', #{goodsMessage}, '%')
         </if>
+        <if test="goodsState != null and goodsState != ''">
+            and a.goods_state like concat('%', #{goodsState}, '%')
+        </if>
         order by a.create_time desc
     </select>
 

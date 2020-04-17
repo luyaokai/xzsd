@@ -42,7 +42,7 @@ public interface GoodsDao {
      * @param userId 更新人
      * @return
      */
-    int deleteGoods(List<String> listCode, @Param("userId") String userId);
+    int deleteGoods(@Param("listCode") List<String> listCode, @Param("userId") String userId);
 
     /**
      * 修改商品信息

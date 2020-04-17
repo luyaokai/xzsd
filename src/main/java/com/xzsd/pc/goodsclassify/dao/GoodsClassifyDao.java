@@ -34,7 +34,7 @@ public interface GoodsClassifyDao {
      * @param userId 更新人
      * @return
      */
-    int deleteGoodsClassify(List<String> listCode, @Param("userId") String userId);
+    int deleteGoodsClassify(@Param("listCode") List<String> listCode, @Param("userId") String userId);
 
     /**
      * 修改商品分类信息

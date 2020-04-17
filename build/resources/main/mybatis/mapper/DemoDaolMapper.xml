@@ -54,7 +54,6 @@
         a.user_code userCode,
         a.user_name userName,
         a.user_acct userAcct,
-        a.user_pwd userPwd,
         a.id_card idCard,
         a.sex sex,
         a.phone,
@@ -69,11 +68,15 @@
         a.version
         from t_ysy_user a
         where a.is_deleted = 0
+        and a.role in (0,1)
         <if test="userAcct != null and userAcct != ''">
             and a.user_acct like concat('%', #{userAcct}, '%')
         </if>
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="role != null and role != ''">
+            and a.role like concat('%', #{role}, '%')
         </if>
         order by a.create_time desc
     </select>
@@ -129,5 +132,6 @@
         from t_ysy_user
         where user_code = #{userCode}
         and is_deleted = 0
+        and role in(0,1)
     </select>
 </mapper>

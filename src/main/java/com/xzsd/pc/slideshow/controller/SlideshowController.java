@@ -29,7 +29,7 @@ public class SlideshowController {
     private SlideshowService slideshowService;
 
     /**
-     * demo 新增用户
+     * slideshow 新增轮播图
      *
      * @param slideshowInfo
      * @return AppResponse
@@ -45,14 +45,14 @@ public class SlideshowController {
             AppResponse appResponse = slideshowService.saveSlideshow(slideshowInfo);
             return appResponse;
         } catch (Exception e) {
-            logger.error("用户新增失败", e);
+            logger.error("轮播图新增失败", e);
             System.out.println(e.toString());
             throw e;
         }
     }
 
     /**
-     * demo 用户列表(分页)
+     * demo 轮播图列表(分页)
      *
      * @param slideshowInfoVO
      * @return AppResponse
@@ -71,7 +71,7 @@ public class SlideshowController {
     }
 
     /**
-     * demo 删除轮播图
+     * slideshow 删除轮播图
      *
      * @param slideshowCode
      * @return AppResponse

@@ -25,7 +25,7 @@ public class SlideshowInfoVO {
     /**
      * 状态 0启用 1禁用
      */
-    private int slideshowState;
+    private String slideshowState;
     /**
      * 有效期起
      */
@@ -67,11 +67,11 @@ public class SlideshowInfoVO {
         this.workTime = workTime;
     }
 
-    public int getSlideshowState() {
+    public String getSlideshowState() {
         return slideshowState;
     }
 
-    public void setSlideshowState(int slideshowState) {
+    public void setSlideshowState(String slideshowState) {
         this.slideshowState = slideshowState;
     }
 

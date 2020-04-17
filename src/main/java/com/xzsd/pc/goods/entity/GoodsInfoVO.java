@@ -51,11 +51,11 @@ public class GoodsInfoVO {
     /**
      * 商品状态 0在售，1已下架，2未发布
      */
-    private int goodsState;
+    private String goodsState;
     /**
      * 上架时间
      */
-    private Date sellTime;
+    private String sellTime;
     /**
      * 浏览量
      */
@@ -137,19 +137,19 @@ public class GoodsInfoVO {
         this.seeSum = seeSum;
     }
 
-    public Date getSellTime() {
+    public String getSellTime() {
         return sellTime;
     }
 
-    public void setSellTime(Date sellTime) {
+    public void setSellTime(String sellTime) {
         this.sellTime = sellTime;
     }
 
-    public int getGoodsState() {
+    public String getGoodsState() {
         return goodsState;
     }
 
-    public void setGoodsState(int goodsState) {
+    public void setGoodsState(String goodsState) {
         this.goodsState = goodsState;
     }
 

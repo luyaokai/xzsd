@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.slideshow.dao.SlideshowDao">
 
-    <!--统计轮播图序号数量-->
+    <!--统计轮播图商品编号数量-->
+    <select id="countGoodsCode" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo" resultType="int">
+        select count(goods_code)
+        from t_ysy_slideshow
+        where is_deleted = 0
+        and goods_code = #{goodsCode}
+    </select>
+
+    <!--统计轮播图商品序号数量-->
     <select id="countSlideshowSort" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo" resultType="int">
         select count(slideshow_sort)
         from t_ysy_slideshow

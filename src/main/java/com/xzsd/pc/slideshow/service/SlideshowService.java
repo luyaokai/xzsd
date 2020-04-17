@@ -26,7 +26,6 @@ public class SlideshowService {
     @Resource
     private SlideshowDao slideshowDao;
 
-
     /**
      * demo 新增轮播图
      * @param slideshowInfo
@@ -41,6 +40,10 @@ public class SlideshowService {
         if(0 != countSlideshowSort) {
             return AppResponse.bizError("轮播图排序冲突，请重新输入！");
         }
+        int countGoodsCode = slideshowDao.countGoodsCode(slideshowInfo);
+        if(0 != countGoodsCode) {
+            return AppResponse.bizError("选择商品重复！");
+        }
         slideshowInfo.setSlideshowCode(StringUtil.getCommonCode(2));
         slideshowInfo.setIsDeleted(0);
         // 新增轮播图
@@ -52,7 +55,7 @@ public class SlideshowService {
     }
 
     /**
-     * demo 查询轮播图列表（分页）
+     * slideshow 查询轮播图列表（分页）
      * @param slideshowInfoVO
      * @return
      * @Author cairuifeng
@@ -67,7 +70,7 @@ public class SlideshowService {
     }
 
     /**
-     * demo 删除用户
+     * slideshow 删除轮播图
      * @param slideshowCode
      * @param userId
      * @return

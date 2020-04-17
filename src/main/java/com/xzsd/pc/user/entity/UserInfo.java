@@ -53,6 +53,10 @@ public class UserInfo {
      */
     private String imagePath;
     /**
+     * 角色 0管理员，1店长，2司机
+     */
+    private String role;
+    /**
      * 作废标记 0为存在，1为作废
      */
     private int isDeleted;
@@ -60,10 +64,6 @@ public class UserInfo {
      * 创建时间
      */
     private Date createTime1;
-    /**
-     * 角色 0管理员，1店长，2司机
-     */
-    private int role;
     /**
      * 创建者
      */
@@ -162,9 +162,9 @@ public class UserInfo {
         this.imagePath = imagePath;
     }
 
-    public int getRole() { return role; }
+    public String getRole() { return role; }
 
-    public void setRole(int role) {this.role=role; }
+    public void setRole(String role) {this.role=role; }
 
     public int getIsDeleted() {
         return isDeleted;

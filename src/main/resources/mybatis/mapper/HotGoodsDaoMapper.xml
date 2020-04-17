@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.hotgoods.dao.HotGoodsDao">
+
+    <!--统计轮播图商品编号数量-->
+    <select id="countGoodsCode" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
+        select count(goods_code)
+        from t_ysy_hotgoods
+        where is_deleted = 0
+        and goods_code = #{goodsCode}
+    </select>
+
+    <!--统计热门商品序号数量-->
+    <select id="countHotGoodsSort" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
+        select count(hotgoods_sort)
+        from t_ysy_hotgoods
+        where is_deleted = 0
+        and hotgoods_sort = #{hotGoodsSort}
+    </select>
+
+    <!--新增热门商品-->
+    <insert id="saveHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        insert into t_ysy_hotgoods
+        (hotgoods_code,
+         goods_code,
+         hotgoods_sort,
+         is_deleted,
+         create_user,
+         create_time,
+         update_user,
+         update_time,
+         version)
+        values
+           (#{hotGoodsCode},
+            #{goodsCode},
+            #{hotGoodsSort},
+            #{isDeleted},
+            #{createUser1},
+            now(),
+            #{updateUser1},
+            now(),
+            0)
+    </insert>
+
+    <!--热门商品列表-->
+    <select id="listHotGoodsByPage" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO">
+        select
+        a.hotgoods_code hotGoodsCode,
+        b.goods_code goodsCode,
+        b.goods_name goodsName,
+        b.sell_price goodsPrice,
+        a.hotgoods_sort hotGoodsSort,
+        b.goods_introduce  goodsIntroduce,
+        a.is_deleted isDeleted,
+        a.create_time createTime1,
+        a.create_user createUser1,
+        a.update_time updateTime1,
+        a.update_user updateUser1,
+        a.version
+        from t_ysy_hotgoods a,t_ysy_goods b
+        where a.is_deleted = 0
+        and a.goods_code = b.goods_code
+        <if test="goodsCode != null and goodsCode != ''">
+            and b.goods_code like concat('%', #{goodsCode}, '%')
+        </if>
+        <if test="goodsName != null and goodsName != ''">
+            and b.goods_name like concat('%', #{goodsName}, '%')
+        </if>
+        order by a.hotgoods_sort asc
+    </select>
+
+    <!--删除轮播图-->
+    <update id="deleteHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        update t_ysy_hotgoods
+        set
+        is_deleted = 1,
+        update_time= now(),
+        update_user  = #{userId},
+        version = version + 1
+        where hotgoods_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改热门商品信息-->
+    <update id="updateHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        update t_ysy_hotgoods
+        set
+            goods_code   = #{goodsCode},
+            hotgoods_sort= #{hotGoodsSort},
+            update_time  = now(),
+            update_user  = #{updateUser1},
+            version      = version + 1
+        where hotgoods_code = #{hotGoodsCode}
+          and version = #{version}
+    </update>
+
+    <!--获取热门商品信息-->
+    <select id="getHotGoodsByHotGoodsCode" parameterType="java.lang.String" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
+        select
+            hotgoods_sort hotGoodsSort,
+            hotgoods_code hotGoodsCode,
+            goods_code goodsCode,
+            version
+        from t_ysy_hotgoods
+        where hotgoods_code = #{hotGoodsCode}
+        and is_deleted = 0
+    </select>
+
+    <!--热门商品展示数量-->
+    <select id="getHotGoodsShowNum" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO1" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO1">
+        select
+        show_num hotGoodsShowNum,
+        update_time updateTime1,
+        update_user updateUser1,
+        version
+        from t_ysy_hotgoodsshownum
+    </select>
+
+    <!--修改热门商品展示数量-->
+    <update id="updateHotGoodsShowNum" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO1">
+        update t_ysy_hotgoodsshownum
+        set
+            show_num   = #{hotGoodsShowNum},
+            update_time  = now(),
+            update_user  = #{updateUser1},
+            version      = version + 1
+        where version = #{version}
+    </update>
+</mapper>

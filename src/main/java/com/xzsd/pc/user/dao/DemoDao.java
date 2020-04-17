@@ -42,7 +42,7 @@ public interface DemoDao {
      * @param userId 更新人
      * @return
      */
-    int deleteUser(List<String> listCode, @Param("userId") String userId);
+    int deleteUser(@Param("listCode") List<String> listCode, @Param("userId") String userId);
 
     /**
      * 修改用户信息
