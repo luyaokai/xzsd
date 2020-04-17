@@ -32,10 +32,6 @@ public class UserInfoVO {
      */
     private String userAcct;
     /**
-     * 用户密码
-     */
-    private String userPwd;
-    /**
      * 身份证号码
      */
     private String idCard;
@@ -102,14 +98,6 @@ public class UserInfoVO {
 
     public void setUserAcct(String userAcct) {
         this.userAcct = userAcct;
-    }
-
-    public String getUserPwd() {
-        return userPwd;
-    }
-
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
     }
 
     public String getIdCard() {

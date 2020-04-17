@@ -1,6 +1,5 @@
 package com.xzsd.pc.slideshow.controller;
 
-import com.xzsd.pc.goods.entity.GoodsInfoVO;
 import com.xzsd.pc.slideshow.entity.SlideshowInfo;
 import com.xzsd.pc.slideshow.entity.SlideshowInfoVO;
 import com.xzsd.pc.slideshow.entity.SlideshowInfoVO1;

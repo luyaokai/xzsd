@@ -57,10 +57,6 @@ public class UserInfo {
      */
     private int isDeleted;
     /**
-     * 序号
-     */
-    private int sortNo;
-    /**
      * 创建时间
      */
     private Date createTime1;
@@ -176,14 +172,6 @@ public class UserInfo {
 
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
-    }
-
-    public int getSortNo() {
-        return sortNo;
-    }
-
-    public void setSortNo(int sortNo) {
-        this.sortNo = sortNo;
     }
 
     public Date getCreateTime1() {

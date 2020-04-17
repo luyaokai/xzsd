@@ -88,7 +88,7 @@ public class GoodsInfo {
     /**
      * 上架时间
      */
-    private Date sellTime;
+    private String sellTime;
     /**
      * 浏览量
      */
@@ -195,11 +195,11 @@ public class GoodsInfo {
         this.seeSum = seeSum;
     }
 
-    public Date getSellTime() {
+    public String getSellTime() {
         return sellTime;
     }
 
-    public void setSellTime(Date sellTime) {
+    public void setSellTime(String sellTime) {
         this.sellTime = sellTime;
     }
 
