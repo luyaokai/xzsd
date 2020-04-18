@@ -44,7 +44,7 @@ public interface GoodsClassifyDao {
     int updateGoodsClassify(GoodsClassifyInfo goodsClassifyInfo);
 
     /**
-     * 查询用户信息
+     * 查询商品分类信息
      * @param classifyCode 商品分类编号
      * @return 修改结果
      */

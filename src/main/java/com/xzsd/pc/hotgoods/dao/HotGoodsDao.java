@@ -67,11 +67,11 @@ public interface HotGoodsDao {
     HotGoodsInfo getHotGoodsByHotGoodsCode(@Param("hotGoodsCode") String hotGoodsCode);
 
     /**
-     * 获取热门商品战术数量
-     * @param hotGoodsInfoVO1 热门商品信息
+     * 获取热门商品展示数量
+     *
      * @return 热门商品展示数量
      */
-    List<HotGoodsInfoVO1> getHotGoodsShowNum(HotGoodsInfoVO1 hotGoodsInfoVO1);
+    HotGoodsInfoVO1 getHotGoodsShowNum();
 
     /**
      * 修改热门商品展示数量

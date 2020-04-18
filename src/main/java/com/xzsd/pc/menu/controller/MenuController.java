@@ -1,6 +1,9 @@
-package com.xzsd.pc.user.controller;
+package com.xzsd.pc.menu.controller;
 
-
+import com.xzsd.pc.menu.entity.MenuInfo;
+import com.xzsd.pc.menu.entity.MenuInfoVO;
+import com.xzsd.pc.menu.service.MenuService;
+import com.xzsd.pc.user.controller.DemoController;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.entity.UserInfoVO;
 import com.xzsd.pc.user.service.DemoService;
@@ -14,36 +17,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-
 /**
- * @Description增删改查DEMO
- * @Author cairuifeng
- * @Date 2020-03-25
+ * @author cairfuieng
+ * @date 2020-04-18
  */
 @RestController
-@RequestMapping("/user")
-public class DemoController {
+@RequestMapping("/menu")
+public class MenuController {
 
     private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
 
     @Resource
-    private DemoService demoService;
+    private MenuService menuService;
 
     /**
-     * demo 新增用户
+     * menu 新增菜单
      *
-     * @param userInfo
+     * @param menuInfo
      * @return AppResponse
      * @author cairufieng
-     * @Date 2020-03-25
+     * @Date 2020-04-18
      */
-    @PostMapping("saveUser")
-    public AppResponse saveUser(UserInfo userInfo) {
+    @PostMapping("saveMenu")
+    public AppResponse saveMenu(MenuInfo menuInfo) {
         try {
             //获取用户id
             String userId = AuthUtils.getCurrentUserId();
-            userInfo.setCreateUser1(userId);
-            AppResponse appResponse = demoService.saveUser(userInfo);
+            menuInfo.setCreateUser1(userId);
+            AppResponse appResponse = menuService.saveMenu(menuInfo);
             return appResponse;
         } catch (Exception e) {
             logger.error("用户新增失败", e);
@@ -53,17 +54,17 @@ public class DemoController {
     }
 
     /**
-     * demo 用户列表(分页)
+     * menu 菜单列表
      *
-     * @param userInfoVO
+     *
      * @return AppResponse
      * @author cairuifeng
-     * @Date 2020-03-25
+     * @Date 2020-04-18
      */
-    @RequestMapping(value = "listUsers")
-    public AppResponse listUsers(UserInfoVO userInfoVO) {
+    @RequestMapping(value = "listMenu")
+    public AppResponse listMenu() {
         try {
-            return demoService.listUsers(userInfoVO);
+            return menuService.listMenu();
         } catch (Exception e) {
             logger.error("查询用户列表异常", e);
             System.out.println(e.toString());
@@ -72,19 +73,38 @@ public class DemoController {
     }
 
     /**
-     * demo 删除用户
+     * menu 用户菜单列表
      *
-     * @param userCode
+     * @param role
      * @return AppResponse
      * @author cairuifeng
-     * @Date 2020-03-25
+     * @Date 2020-04-18
      */
-    @PostMapping("deleteUser")
-    public AppResponse deleteUser(String userCode) {
+    @RequestMapping(value = "listMenuHome")
+    public AppResponse listMenuHome(String role) {
+        try {
+            return menuService.listMenuHome(role);
+        } catch (Exception e) {
+            logger.error("查询用户列表异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
+     * menu 删除菜单
+     *
+     * @param menuCode
+     * @return AppResponse
+     * @author cairuifeng
+     * @Date 2020-04-18
+     */
+    @PostMapping("deleteMenu")
+    public AppResponse deleteMenu(String menuCode) {
         try {
             //获取用户id
             String userId = AuthUtils.getCurrentUserId();
-            return demoService.deleteUser(userCode, userId);
+            return menuService.deleteMenu(menuCode, userId);
         } catch (Exception e) {
             logger.error("用户删除错误", e);
             System.out.println(e.toString());
@@ -93,21 +113,21 @@ public class DemoController {
     }
 
     /**
-     * demo 修改用户
+     * menu 修改菜单
      *
-     * @param userInfo
+     * @param menuInfo
      * @return AppResponse
      * @author cairuifeng
-     * @Date 2020-03-25
+     * @Date 2020-04-18
      */
-    @PostMapping("updateUser")
-    public AppResponse updateUser(UserInfo userInfo) {
+    @PostMapping("updateMenu")
+    public AppResponse updateMenu(MenuInfo menuInfo) {
         try {
             //获取用户id
             String userId = AuthUtils.getCurrentUserId();
-            userInfo.setCreateUser1(userId);
-            userInfo.setUpdateUser1(userId);
-            return demoService.updateUser(userInfo);
+            menuInfo.setCreateUser1(userId);
+            menuInfo.setUpdateUser1(userId);
+            return menuService.updateMenu(menuInfo);
         } catch (Exception e) {
             logger.error("修改用户信息错误", e);
             System.out.println(e.toString());
@@ -116,17 +136,17 @@ public class DemoController {
     }
 
     /**
-     * demo 查询用户详情
+     * menu 查询菜单详情
      *
-     * @param userCode
+     * @param menuCode
      * @return AppResponse
      * @author cairuifeng
-     * @Date 2020-03-25
+     * @Date 2020-04-18
      */
-    @RequestMapping(value = "getUserByUserCode")
-    public AppResponse getUserByUserCode(String userCode) {
+    @RequestMapping(value = "getMenuByMenuCode")
+    public AppResponse getMenuByMenuCode(String menuCode) {
         try {
-            return demoService.getUserByUserCode(userCode);
+            return menuService.getMenuByMenuCode(menuCode);
         } catch (Exception e) {
             logger.error("用户查询错误", e);
             System.out.println(e.toString());

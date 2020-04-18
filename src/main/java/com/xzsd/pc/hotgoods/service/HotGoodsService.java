@@ -135,14 +135,14 @@ public class HotGoodsService {
 
     /**
      * hotgoods 查询热门商品展示数量
-     * @param hotGoodsInfoVO1
+     *
      * @return
      * @Author cairuifeng
      * @Date 2020-04-17
      */
-    public AppResponse getHotGoodsShowNum(HotGoodsInfoVO1 hotGoodsInfoVO1) {
-        List<HotGoodsInfoVO1> hotGoodsInfoVO1List = hotGoodsDao.getHotGoodsShowNum(hotGoodsInfoVO1);
-        return AppResponse.success("查询成功！",hotGoodsInfoVO1List);
+    public AppResponse getHotGoodsShowNum() {
+        HotGoodsInfoVO1 hotGoodsInfoVO1 = hotGoodsDao.getHotGoodsShowNum();
+        return AppResponse.success("查询成功！",hotGoodsInfoVO1);
     }
 
     /**

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.area.dao.AreaDao">
+
+    <!--省市区下拉框查询-->
+    <select id="listArea" parameterType="com.xzsd.pc.area.entity.AreaInfo" resultType="com.xzsd.pc.area.entity.AreaInfo">
+        select
+            area_code areaCode,
+            area_name areaName
+        from t_ysy_area
+        where area_father = #{areaCode}
+    </select>
+</mapper>

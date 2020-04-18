@@ -8,6 +8,7 @@
         from t_ysy_hotgoods
         where is_deleted = 0
         and goods_code = #{goodsCode}
+        and hotgoods_code != #{hotGoodsCode}
     </select>
 
     <!--统计热门商品序号数量-->
@@ -16,6 +17,7 @@
         from t_ysy_hotgoods
         where is_deleted = 0
         and hotgoods_sort = #{hotGoodsSort}
+        and hotgoods_code != #{hotGoodsCode}
     </select>
 
     <!--新增热门商品-->

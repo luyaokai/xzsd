@@ -54,7 +54,7 @@ public interface DemoDao {
     /**
      * 查询用户信息
      * @param userCode 用户编号
-     * @return 修改结果
+     * @return 用户信息
      */
     UserInfo getUserByUserCode(@Param("userCode") String userCode);
 }

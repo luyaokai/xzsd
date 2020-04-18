@@ -17,7 +17,7 @@ import java.util.List;
 public interface GoodsDao {
     /**
      * 统计商品数量
-     * @param goodsInfo 用户信息
+     * @param goodsInfo 商品信息
      * @return
      */
     int countGoodsCode(GoodsInfo goodsInfo);

@@ -133,15 +133,14 @@ public class HotGoodsController {
     /**
      * hotgoods 热门商品展示数量
      *
-     * @param hotGoodsInfoVO1
      * @return AppResponse
      * @author cairuifeng
      * @Date 2020-04-17
      */
     @RequestMapping(value = "getHotGoodsShowNum")
-    public AppResponse getHotGoodsShowNum(HotGoodsInfoVO1 hotGoodsInfoVO1) {
+    public AppResponse getHotGoodsShowNum() {
         try {
-            return hotGoodsService.getHotGoodsShowNum(hotGoodsInfoVO1);
+            return hotGoodsService.getHotGoodsShowNum();
         } catch (Exception e) {
             logger.error("查询用户列表异常", e);
             System.out.println(e.toString());

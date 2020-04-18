@@ -110,11 +110,11 @@ public class GoodsService {
     }
 
     /**
-     * demo 查询商品分类下拉框
+     * goods 查询商品分类下拉框
      * @param goodsInfoVO1
      * @return
      * @Author cairuifeng
-     * @Date 2020-04-014
+     * @Date 2020-04-14
      */
     public AppResponse listGoodsClassify(GoodsInfoVO1 goodsInfoVO1) {
         List<GoodsInfoVO1> goodsInfoVO1List = goodsDao.listGoodsByClassifyFather(goodsInfoVO1);
