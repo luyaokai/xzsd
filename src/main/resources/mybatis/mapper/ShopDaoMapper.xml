@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.shop.dao.ShopDao">
+
+    <!--统计用户账号数量-->
+    <select id="countUserCode" parameterType="com.xzsd.pc.shop.entity.ShopInfo" resultType="int">
+        select count(user_code)
+        from t_ysy_user
+        where is_deleted = 0
+        and role = 1
+        and user_code = #{userCode}
+    </select>
+
+    <!--新增门店-->
+    <insert id="saveShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
+        insert into t_ysy_shop
+        (shop_code,
+         shop_tel,
+         user_code,
+         business_code,
+         province_code,
+         city_code,
+         area_code,
+         shop_address,
+         is_deleted,
+         create_user,
+         create_time,
+         update_user,
+         update_time,
+         version)
+        values
+           (#{shopCode},
+            #{shopTel},
+            #{userCode},
+            #{businessCode},
+            #{provinceCode},
+            #{cityCode},
+            #{areaCode},
+            #{shopAddress},
+            #{isDeleted},
+            #{createUser1},
+            now(),
+            #{updateUser1},
+            now(),
+            0)
+    </insert>
+
+    <!--门店列表-->
+    <select id="listShopByPage" parameterType="com.xzsd.pc.shop.entity.ShopInfoVO" resultType="com.xzsd.pc.shop.entity.ShopInfoVO">
+        select
+        a.shop_code shopCode,
+        a.shop_name shopName,
+        a.shop_tel  shopTel,
+        a.shop_address shopAddress,
+        b.user_name userName,
+        a.invite_code inviteCode,
+        b.user_acct  userAcct,
+        a.is_deleted isDeleted,
+        a.create_time createTime1,
+        a.create_user createUser1,
+        a.update_time updateTime1,
+        a.update_user updateUser1,
+        a.version
+        from t_ysy_shop a, t_ysy_user b
+        where a.is_deleted = 0
+        and a.user_code = b.user_code
+        and b.role = 1
+        <if test="shopCode != null and shopCode != ''">
+            and a.shop_code like concat('%', #{shopCode}, '%')
+        </if>
+        <if test="shopName != null and shopName != ''">
+            and a.shop_name like concat('%', #{shopName}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and b.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="provinceCode != null and provinceCode != ''">
+            and a.province_code = #{provinceCode}
+        </if>
+        <if test="cityCode != null and cityCode != ''">
+            and a.city_code = #{cityCode}
+        </if>
+        <if test="areaCode != null and areaCode != ''">
+            and a.area_code = #{areaCode}
+        </if>
+        order by a.create_time desc
+    </select>
+
+    <!--删除门店-->
+    <update id="deleteShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
+        update t_ysy_shop
+        set
+        is_deleted = 1,
+        update_time= now(),
+        update_user  = #{userId},
+        version = version + 1
+        where shop_code in
+        <foreach item="item" index="index" collection="listCode" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--修改门店信息-->
+    <update id="updateShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
+        update t_ysy_shop
+        set
+            shop_name    = #{shopName},
+            shop_tel     = #{shopTel},
+            user_code    = #{userCode},
+            business_code= #{businessCode},
+            province_code= #{provinceCode},
+            city_code    = #{cityCode},
+            area_code    = #{areaCode},
+            shop_address = #{shopAddress},
+            update_time  = now(),
+            update_user  = #{updateUser1},
+            version      = version + 1
+        where shop_code = #{shopCode}
+          and version = #{version}
+    </update>
+
+    <!--获取门店信息-->
+    <select id="getShopByShopCode" parameterType="java.lang.String" resultType="com.xzsd.pc.shop.entity.ShopInfo">
+        select
+            a.shop_code shopCode,
+            a.shop_name shopName,
+            a.shop_tel  shopTel,
+            a.user_code userCode,
+            a.business_code businesCode,
+            a.province_code provinceCode,
+            a.city_code cityCode,
+            a.area_code areaCode,
+            b.area_name provinceName,
+            c.area_name cityName,
+            d.area_name area_name,
+            a.shop_address shopAddress,
+            version
+        from t_ysy_shop a, t_ysy_area b, t_ysy_area c, t_ysy_area d
+        where shop_code = #{shopCode}
+        and a.province_code = b.area_code
+        and a.city_code = c.area_code
+        and a.area_code = d.area_code
+        and is_deleted = 0
+    </select>
+</mapper>

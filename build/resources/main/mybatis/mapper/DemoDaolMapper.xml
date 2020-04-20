@@ -8,6 +8,7 @@
         from t_ysy_user
         where is_deleted = 0
         and user_acct = #{userAcct}
+        and user_code != #{userCode}
     </select>
 
     <!--新增用户-->
