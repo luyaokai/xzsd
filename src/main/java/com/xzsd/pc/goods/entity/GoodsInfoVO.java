@@ -84,6 +84,18 @@ public class GoodsInfoVO {
      * 商品图片路径
      */
     private String imagePath;
+    /**
+     * 商品介绍
+     */
+    private String goodsIntroduce;
+
+    public String getGoodsIntroduce() {
+        return goodsIntroduce;
+    }
+
+    public void setGoodsIntroduce(String goodsIntroduce) {
+        this.goodsIntroduce = goodsIntroduce;
+    }
 
     public String getImagePath() { return imagePath;}
 

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.customer.entity.CustomerInfo;
 import com.xzsd.pc.util.AppResponse;
+import com.xzsd.pc.util.AuthUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +29,7 @@ public class CustomerService {
      * @Date 2020-04-15
      */
     public AppResponse listCustomer(CustomerInfo customerInfo) {
+        customerInfo.setUserId(AuthUtils.getCurrentUserId());
         PageHelper.startPage(customerInfo.getPageNum(), customerInfo.getPageSize());
         List<CustomerInfo> customerInfosList = customerDao.listCustomersByPage(customerInfo);
         // 包装Page对象

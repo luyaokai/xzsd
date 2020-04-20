@@ -1,13 +1,41 @@
-package com.xzsd.pc.shop.entity;
+package com.xzsd.pc.driver.entity;
 
 import java.util.Date;
 
 /**
- * 门店实体类
+ * 司机实体类
  * @author cairuifeng
- * @date 2020-04-19
+ * @date 2020-04-20
  */
-public class ShopInfo {
+public class DriverInfo {
+    /**
+     * 用户代码
+     */
+    private String userCode;
+    /**
+     * 用户名称
+     */
+    private String userName;
+    /**
+     * 用户登录名
+     */
+    private String userAcct;
+    /**
+     * 用户密码
+     */
+    private String userPwd;
+    /**
+     * 身份证号码
+     */
+    private String idCard;
+    /**
+     * 手机号码
+     */
+    private String phone;
+    /**
+     * 用户头像
+     */
+    private String imagePath;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -33,30 +61,6 @@ public class ShopInfo {
      */
     private String version;
     /**
-     * 门店账号
-     */
-    private String shopCode;
-    /**
-     * 门店名称
-     */
-    private String shopName;
-    /**
-     * 门店电话
-     */
-    private String shopTel;
-    /**
-     * 门店地址
-     */
-    private String shopAddress;
-    /**
-     * 店长编码（用户编码）
-     */
-    private String userCode;
-    /**
-     * 邀请码
-     */
-    private String inviteCode;
-    /**
      * 省编号
      */
     private String provinceCode;
@@ -69,9 +73,9 @@ public class ShopInfo {
      */
     private String areaCode;
     /**
-     * 营业执照编码
+     * 角色
      */
-    private String businessCode;
+    private String role;
     /**
      * 省名称
      */
@@ -97,9 +101,9 @@ public class ShopInfo {
 
     public void setProvinceName(String provinceName) { this.provinceName = provinceName; }
 
-    public String getBusinessCode() {return businessCode; }
+    public String getRole() {return role; }
 
-    public void setBusinessCode(String businessCode) {this.businessCode = businessCode;}
+    public void setRole(String role) {this.role = role; }
 
     public String getAreaCode() {return areaCode; }
 
@@ -113,31 +117,64 @@ public class ShopInfo {
 
     public void setProvinceCode(String provinceCode) {this.provinceCode = provinceCode;}
 
-    public String getInviteCode() {return inviteCode; }
 
-    public void setInviteCode(String inviteCode) {this.inviteCode = inviteCode;}
-
-    public String getUserCode() {return userCode; }
-
-    public void setUserCode(String userCode) {this.userCode = userCode;}
-
-    public String getShopAddress() {return shopAddress; }
-
-    public void setShopAddress(String shopAddress) {this.shopAddress = shopAddress;}
-
-    public String getShopTel() {return shopTel;}
-
-    public void setShopTel(String shopTel) {this.shopTel = shopTel;}
-
-    public String getShopName() {return shopName;};
-
-    public void setShopName(String shopName) {this.shopName = shopName;}
-
-    public String getShopCode() {
-        return shopCode;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setShopCode(String shopCode) {this.shopCode = shopCode; }
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAcct() {
+        return userAcct;
+    }
+
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
+    }
+
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
 
     public int getIsDeleted() {
         return isDeleted;
@@ -186,4 +223,5 @@ public class ShopInfo {
     public void setVersion(String version) {
         this.version = version;
     }
+
 }

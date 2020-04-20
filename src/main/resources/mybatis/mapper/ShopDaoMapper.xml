@@ -15,6 +15,7 @@
     <insert id="saveShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
         insert into t_ysy_shop
         (shop_code,
+         shop_name,
          shop_tel,
          user_code,
          business_code,
@@ -22,6 +23,7 @@
          city_code,
          area_code,
          shop_address,
+         invite_code,
          is_deleted,
          create_user,
          create_time,
@@ -30,6 +32,7 @@
          version)
         values
            (#{shopCode},
+            #{shopName},
             #{shopTel},
             #{userCode},
             #{businessCode},
@@ -37,6 +40,7 @@
             #{cityCode},
             #{areaCode},
             #{shopAddress},
+            #{inviteCode},
             #{isDeleted},
             #{createUser1},
             now(),
@@ -65,6 +69,9 @@
         where a.is_deleted = 0
         and a.user_code = b.user_code
         and b.role = 1
+        <if test="role == 1">
+            and a.user_code = (select user_code from t_ysy_shop where user_code = #{userId})
+        </if>
         <if test="shopCode != null and shopCode != ''">
             and a.shop_code like concat('%', #{shopCode}, '%')
         </if>
@@ -132,7 +139,7 @@
             a.area_code areaCode,
             b.area_name provinceName,
             c.area_name cityName,
-            d.area_name area_name,
+            d.area_name areaName,
             a.shop_address shopAddress,
             version
         from t_ysy_shop a, t_ysy_area b, t_ysy_area c, t_ysy_area d
@@ -140,6 +147,6 @@
         and a.province_code = b.area_code
         and a.city_code = c.area_code
         and a.area_code = d.area_code
-        and is_deleted = 0
+        and a.is_deleted = 0
     </select>
 </mapper>

@@ -69,6 +69,14 @@ public class ShopInfoVO {
      * 店长名字（用户名字)
      */
     private String userName;
+    /**
+     * 登陆角色编号
+     */
+    private String userId;
+
+    public String getUserId() {return userId; }
+
+    public void setUserId(String userId) {this.userId = userId; }
 
     public String getUserName() {return userName;}
 

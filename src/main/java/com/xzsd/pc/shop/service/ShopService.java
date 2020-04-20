@@ -8,6 +8,7 @@ import com.xzsd.pc.shop.entity.ShopInfoVO;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.entity.UserInfoVO;
 import com.xzsd.pc.util.AppResponse;
+import com.xzsd.pc.util.AuthUtils;
 import com.xzsd.pc.util.PasswordUtils;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author cairfuifeng
@@ -42,6 +44,10 @@ public class ShopService {
             return AppResponse.bizError("用户编号不存在，请重新输入！");
         }
         shopInfo.setShopCode(StringUtil.getCommonCode(2));
+        Random input = new Random();
+        String shop = input.nextInt(899999)+100000+"";
+        String shopInvite = "YQM" +shop;
+        shopInfo.setInviteCode(shopInvite);
         shopInfo.setIsDeleted(0);
         // 新增门店
         int count = shopDao.saveShop(shopInfo);
@@ -59,6 +65,7 @@ public class ShopService {
      * @Date 2020-04-20
      */
     public AppResponse listShop(ShopInfoVO shopInfoVO) {
+        shopInfoVO.setUserId(AuthUtils.getCurrentUserId());
         PageHelper.startPage(shopInfoVO.getPageNum(), shopInfoVO.getPageSize());
         List<ShopInfoVO> shopInfoVOList = shopDao.listShopByPage(shopInfoVO);
         // 包装Page对象
