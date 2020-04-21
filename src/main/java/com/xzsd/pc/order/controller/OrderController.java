@@ -4,7 +4,6 @@ import com.xzsd.pc.order.entity.OrderDetailsInfo;
 import com.xzsd.pc.order.entity.OrderInfo;
 import com.xzsd.pc.order.service.OrderService;
 import com.xzsd.pc.user.controller.DemoController;
-import com.xzsd.pc.user.entity.UserInfoVO;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;

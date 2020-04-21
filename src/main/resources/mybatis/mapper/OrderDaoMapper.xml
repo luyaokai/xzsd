@@ -45,7 +45,6 @@
         from t_ysy_order a, t_ysy_user b
         where a.is_deleted = 0
         and a.user_code = b.user_code
-        and a.order_code = #{orderCode}
         <if test="orderCode != null and orderCode != ''">
             and a.order_code like concat('%', #{orderCode}, '%')
         </if>
@@ -60,6 +59,12 @@
         </if>
         <if test="role == 1">
             and a.shop_code = (select shop_code from t_ysy_shop where user_code = #{userId})
+        </if>
+        <if test="payTimeStart != null and payTimeStart != ''">
+            and a.pay_time &gt;= DATE_FORMAT( #{payTimeStart} ,'%Y-%m-%d %h:%i:%S')
+        </if>
+        <if test="payTimeEnd != null and payTimeEnd != ''">
+            and a.pay_time &lt;= DATE_FORMAT( #{payTimeEnd} ,'%Y-%m-%d %h:%i:%S')
         </if>
         order by a.create_time desc
     </select>

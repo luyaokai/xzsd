@@ -57,7 +57,7 @@ public interface SlideshowDao {
      * @param slideshowState 轮播图状态
      * @return 修改结果
      */
-    int updateSlideshowState(List<String> listCode, @Param("userId") String userId, int slideshowState);
+    int updateSlideshowState(@Param("listCode") List<String> listCode, @Param("userId") String userId, @Param("slideshowState") int slideshowState);
 
     /**
      * 查询轮播图信息

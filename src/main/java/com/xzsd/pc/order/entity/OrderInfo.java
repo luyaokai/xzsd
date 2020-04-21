@@ -31,10 +31,6 @@ public class OrderInfo {
      */
     private String orderState;
     /**
-     * 支付状态：0已支付，1未支付
-     */
-    private int payState;
-    /**
      * 门店编码
      */
     private String shopCode;
@@ -58,6 +54,30 @@ public class OrderInfo {
      * 登陆人编码
      */
     private String userId;
+    /**
+     * 角色
+     */
+    private String role;
+    /**
+     * 付款时间起
+     */
+    private String payTimeStart;
+    /**
+     * 付款时间止
+     */
+    private String payTimeEnd;
+
+    public String getPayTimeEnd() {return payTimeEnd; }
+
+    public void setPayTimeEnd(String payTimeEnd) {this.payTimeEnd = payTimeEnd;}
+
+    public String getPayTimeStart() {return payTimeStart;}
+
+    public void setPayTimeStart(String payTimeStart) {this.payTimeStart = payTimeStart;}
+
+    public String getRole() {return role; }
+
+    public void setRole(String role) {this.role = role; }
 
     public String getUserId() {return userId;}
 
@@ -82,10 +102,6 @@ public class OrderInfo {
     public String getShopCode() {return shopCode;}
 
     public void setShopCode(String shopCode) {this.shopCode = shopCode; }
-
-    public int getPayState() {return payState; }
-
-    public void setPayState(int payState) {this.payState = payState;}
 
     public String getOrderState() {return orderState; }
 

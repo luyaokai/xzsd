@@ -72,5 +72,5 @@ public interface GoodsDao {
      * @param userId 更新人
      * @return 修改结果
      */
-    int updateGoodsState(List<String> listCode, @Param("userId") String userId, int goodsState);
+    int updateGoodsState(@Param("listCode") List<String> listCode, @Param("userId") String userId,@Param("goodsState") int goodsState);
 }

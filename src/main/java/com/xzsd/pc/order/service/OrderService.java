@@ -7,6 +7,7 @@ import com.xzsd.pc.order.entity.OrderDetailsInfo;
 import com.xzsd.pc.order.entity.OrderInfo;
 import com.xzsd.pc.user.entity.UserInfoVO;
 import com.xzsd.pc.util.AppResponse;
+import com.xzsd.pc.util.AuthUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +48,7 @@ public class OrderService {
      * @Date 2020-04-20
      */
     public AppResponse listOrder(OrderInfo orderInfo) {
+        orderInfo.setUserId(AuthUtils.getCurrentUserId());
         PageHelper.startPage(orderInfo.getPageNum(), orderInfo.getPageSize());
         List<OrderInfo> orderInfoList = orderDao.listOrderByPage(orderInfo);
         // 包装Page对象
@@ -71,7 +73,7 @@ public class OrderService {
             appResponse = AppResponse.versionError("数据有变化，请刷新！");
             return appResponse;
         }
-        return AppResponse.success("禁用成功");
+        return AppResponse.success("订单状态修改成功");
 
     }
 }
