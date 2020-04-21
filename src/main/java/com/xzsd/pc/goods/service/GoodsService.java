@@ -35,6 +35,7 @@ public class GoodsService {
     public AppResponse saveGoods(GoodsInfo goodsInfo) {
         goodsInfo.setGoodsCode(StringUtil.getCommonCode(2));
         goodsInfo.setIsDeleted(0);
+        goodsInfo.setGoodsState("1");
         // 新增商品
         int count = goodsDao.saveGoods(goodsInfo);
         if(0 == count) {
@@ -59,7 +60,7 @@ public class GoodsService {
     }
 
     /**
-     * demo 删除用户
+     * goods 删除商品
      * @param goodsCode
      * @param userId
      * @return
@@ -70,7 +71,17 @@ public class GoodsService {
     public AppResponse deleteGoods(String goodsCode, String userId) {
         List<String> listCode = Arrays.asList(goodsCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
-        // 删除用户
+        // 校验是否为轮播图
+        int countSlideshow = goodsDao.countSlideshow(goodsCode);
+        if(0 < countSlideshow) {
+            return AppResponse.bizError("删除失败，该商品为轮播图");
+        }
+        //校验商品是否为热门商品
+        int countHotGoods = goodsDao.countHotGoods(goodsCode);
+        if(0 < countHotGoods) {
+            return AppResponse.bizError("删除失败，该商品为热门商品");
+        }
+        // 删除商品
         int count = goodsDao.deleteGoods(listCode,userId);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");

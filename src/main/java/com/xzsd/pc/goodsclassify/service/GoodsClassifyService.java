@@ -63,7 +63,7 @@ public class GoodsClassifyService {
         if(0 < countGoods) {
             return AppResponse.bizError("删除失败，该分类下有商品");
         }
-        // 删除用户
+        // 删除商品分类
         int count = goodsClassifyDao.deleteGoodsClassify(listCode,userId);
         if(0 == count) {
             appResponse = AppResponse.bizError("删除失败，请重试！");

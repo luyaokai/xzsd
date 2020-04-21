@@ -46,6 +46,7 @@ public class SlideshowService {
         }
         slideshowInfo.setSlideshowCode(StringUtil.getCommonCode(2));
         slideshowInfo.setIsDeleted(0);
+        slideshowInfo.setSlideshowState("0");
         // 新增轮播图
         int count = slideshowDao.saveSlideshow(slideshowInfo);
         if(0 == count) {

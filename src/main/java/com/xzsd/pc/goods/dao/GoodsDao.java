@@ -16,11 +16,18 @@ import java.util.List;
 @Mapper
 public interface GoodsDao {
     /**
-     * 统计商品数量
-     * @param goodsInfo 商品信息
+     * 统计商品是否为轮播图
+     * @param goodsCode 商品信息
      * @return
      */
-    int countGoodsCode(GoodsInfo goodsInfo);
+    int countSlideshow(@Param("goodsCode") String goodsCode );
+
+    /**
+     * 统计商品是否为热门商品
+     * @param goodsCode 商品信息
+     * @return
+     */
+    int countHotGoods(@Param("goodsCode") String goodsCode );
 
     /**
      * 新增商品

@@ -2,12 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.goods.dao.GoodsDao">
 
-    <!--统计用户账号数量-->
-    <select id="countGoodsCode" parameterType="com.xzsd.pc.goods.entity.GoodsInfo" resultType="int">
-        select count(goods_code)
-        from t_ysy_goods
+    <!--统计商品是否绑定轮播图-->
+    <select id="countSlideshow" parameterType="java.lang.String" resultType="int">
+        select count(slideshow_code)
+        from t_ysy_slideshow
         where is_deleted = 0
-        and goods_code= #{goodsCode}
+        and goods_code = #{goodsCode}
+    </select>
+
+    <!--统计商品是否绑定热门商品-->
+    <select id="countHotGoods" parameterType="java.lang.String" resultType="int">
+        select count(hotgoods_code)
+        from t_ysy_hotgoods
+        where is_deleted = 0
+        and goods_code = #{goodsCode}
     </select>
 
     <!--新增商品-->
