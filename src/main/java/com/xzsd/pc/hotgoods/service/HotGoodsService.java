@@ -112,7 +112,7 @@ public class HotGoodsService {
         if(0 != countGoodsCode) {
             return AppResponse.bizError("选择商品重复！");
         }
-        // 修改用户信息
+        // 修改商品信息
         int count = hotGoodsDao.updateHotGoods(hotGoodsInfo);
         if (0 == count) {
             appResponse = AppResponse.versionError("数据有变化，请刷新！");

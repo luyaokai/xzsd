@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.goodsclassify.dao.GoodsClassifyDao">
 
+    <!--统计对应一级分类下二级商品分类数量-->
+    <select id="countSecondClassify" parameterType="java.lang.String" resultType="int">
+        select count(classify_code)
+        from t_ysy_goodsclassify
+        where is_deleted = 0
+        and classify_father = #{classifyCode}
+    </select>
+
+    <!--统计对应二级分类下商品数量-->
+    <select id="countGoods" parameterType="java.lang.String" resultType="int">
+        select count(goods_code)
+        from t_ysy_goods
+        where is_deleted = 0
+        and second_code = #{classifyCode}
+    </select>
+
     <!--新增商品分类-->
     <insert id="saveGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
         insert into t_ysy_goodsclassify

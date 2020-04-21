@@ -53,6 +53,16 @@ public class GoodsClassifyService {
     public AppResponse deleteGoodsClassify(String classifyCode, String userId) {
         List<String> listCode = Arrays.asList(classifyCode.split(","));
         AppResponse appResponse = AppResponse.success("删除成功！");
+        // 校验一级排序下是否存在二级排序
+        int countSecondClassify = goodsClassifyDao.countSecondClassify(classifyCode);
+        if(0 < countSecondClassify) {
+            return AppResponse.bizError("删除失败，分类下有二级分类");
+        }
+        //校验分类下是否有商品
+        int countGoods = goodsClassifyDao.countGoods(classifyCode);
+        if(0 < countGoods) {
+            return AppResponse.bizError("删除失败，该分类下有商品");
+        }
         // 删除用户
         int count = goodsClassifyDao.deleteGoodsClassify(listCode,userId);
         if(0 == count) {

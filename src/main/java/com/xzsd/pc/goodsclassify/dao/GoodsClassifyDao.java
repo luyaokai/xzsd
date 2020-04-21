@@ -2,6 +2,7 @@ package com.xzsd.pc.goodsclassify.dao;
 
 import com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo;
 import com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfoVo;
+import com.xzsd.pc.user.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,6 +14,20 @@ import java.util.List;
  */
 @Mapper
 public interface GoodsClassifyDao {
+
+    /**
+     * 统计一级分类下的二级分类数量
+     * @param classifyCode 商品分类信息
+     * @return
+     */
+    int countSecondClassify(@Param("classifyCode") String classifyCode);
+
+    /**
+     * 统计二级分类下商品数量
+     * @param classifyCode 商品分类信息
+     * @return
+     */
+    int countGoods(@Param("classifyCode") String classifyCode);
 
     /**
      * 新增商品分类
