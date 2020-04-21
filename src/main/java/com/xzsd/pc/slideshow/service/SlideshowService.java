@@ -90,7 +90,7 @@ public class SlideshowService {
     }
 
     /**
-     * demo 修改轮播图状态
+     * slideshow 修改轮播图状态
      * @param slideshowCode
      * @return
      * @Author cairuifeng

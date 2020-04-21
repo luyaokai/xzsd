@@ -50,6 +50,22 @@ public class OrderInfo {
      * 确认付款时间
      */
     private String payTime;
+    /**
+     * 用户编码
+     */
+    private String userCode;
+    /**
+     * 登陆人编码
+     */
+    private String userId;
+
+    public String getUserId() {return userId;}
+
+    public void setUserId(String userId) {this.userId = userId;}
+
+    public String getUserCode() {return userCode;}
+
+    public void setUserCode(String userCode) {this.userCode = userCode;}
 
     public String getPayTime() {return payTime;}
 
