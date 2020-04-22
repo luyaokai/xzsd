@@ -5,7 +5,7 @@
     <!--统计轮播图商品编号数量-->
     <select id="countGoodsCode" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
         select count(goods_code)
-        from t_ysy_hotgoods
+        from t_sys_hotgoods
         where is_deleted = 0
         and goods_code = #{goodsCode}
         <if test="hotGoodsCode != null and hotGoodsCode != ''">
@@ -16,7 +16,7 @@
     <!--统计热门商品序号数量-->
     <select id="countHotGoodsSort" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
         select count(hotgoods_sort)
-        from t_ysy_hotgoods
+        from t_sys_hotgoods
         where is_deleted = 0
         and hotgoods_sort = #{hotGoodsSort}
         <if test="hotGoodsCode != null and hotGoodsCode != ''">
@@ -26,7 +26,7 @@
 
     <!--新增热门商品-->
     <insert id="saveHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
-        insert into t_ysy_hotgoods
+        insert into t_sys_hotgoods
         (hotgoods_code,
          goods_code,
          hotgoods_sort,
@@ -63,7 +63,7 @@
         a.update_time updateTime1,
         a.update_user updateUser1,
         a.version
-        from t_ysy_hotgoods a,t_ysy_goods b
+        from t_sys_hotgoods a,t_sys_goods b
         where a.is_deleted = 0
         and a.goods_code = b.goods_code
         <if test="goodsCode != null and goodsCode != ''">
@@ -77,7 +77,7 @@
 
     <!--删除轮播图-->
     <update id="deleteHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
-        update t_ysy_hotgoods
+        update t_sys_hotgoods
         set
         is_deleted = 1,
         update_time= now(),
@@ -91,7 +91,7 @@
 
     <!--修改热门商品信息-->
     <update id="updateHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
-        update t_ysy_hotgoods
+        update t_sys_hotgoods
         set
             goods_code   = #{goodsCode},
             hotgoods_sort= #{hotGoodsSort},
@@ -109,7 +109,7 @@
             hotgoods_code hotGoodsCode,
             goods_code goodsCode,
             version
-        from t_ysy_hotgoods
+        from t_sys_hotgoods
         where hotgoods_code = #{hotGoodsCode}
         and is_deleted = 0
     </select>
@@ -121,12 +121,12 @@
         update_time updateTime1,
         update_user updateUser1,
         version
-        from t_ysy_hotgoodsshownum
+        from t_sys_hotgoodsshownum
     </select>
 
     <!--修改热门商品展示数量-->
     <update id="updateHotGoodsShowNum" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO1">
-        update t_ysy_hotgoodsshownum
+        update t_sys_hotgoodsshownum
         set
             show_num   = #{hotGoodsShowNum},
             update_time  = now(),

@@ -4,7 +4,7 @@
 
     <!--新增菜单-->
     <insert id="saveMenu" parameterType="com.xzsd.pc.menu.entity.MenuInfo">
-        insert into t_ysy_menu
+        insert into t_sys_menu
         (menu_code,
          menu_name,
          menu_path,
@@ -39,7 +39,7 @@
         a.update_time updateTime1,
         a.update_user updateUser1,
         a.version
-        from t_ysy_menu a
+        from t_sys_menu a
         where a.is_deleted = 0
     </select>
 
@@ -54,7 +54,7 @@
         a.update_time updateTime1,
         a.update_user updateUser1,
         a.version
-        from t_ysy_menu a
+        from t_sys_menu a
         where a.is_deleted = 0
         <if test="role == 1">
             and a.menu_code in ('6','7','9','10')
@@ -66,7 +66,7 @@
 
     <!--删除菜单-->
     <update id="deleteMenu" parameterType="com.xzsd.pc.menu.entity.MenuInfo">
-        update t_ysy_menu
+        update t_sys_menu
         set
         is_deleted = 1,
         update_time= now(),
@@ -80,7 +80,7 @@
 
     <!--修改菜单信息-->
     <update id="updateMenu" parameterType="com.xzsd.pc.menu.entity.MenuInfo">
-        update t_ysy_menu
+        update t_sys_menu
         set
             menu_name    = #{menuName},
             menu_path    = #{menuPath},
@@ -98,9 +98,9 @@
             menu_code menuCode,
             menu_name menuName,
             menu_path menuPath,
-            menu_comment munComment,
+            menu_comment menuComment,
             version
-        from t_ysy_menu
+        from t_sys_menu
         where menu_code = #{menuCode}
         and is_deleted = 0
     </select>

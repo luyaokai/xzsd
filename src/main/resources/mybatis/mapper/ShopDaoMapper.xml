@@ -5,7 +5,7 @@
     <!--统计用户账号数量-->
     <select id="countUserCode" parameterType="com.xzsd.pc.shop.entity.ShopInfo" resultType="int">
         select count(user_code)
-        from t_ysy_user
+        from t_sys_user
         where is_deleted = 0
         and role = 1
         and user_code = #{userCode}
@@ -13,7 +13,7 @@
 
     <!--新增门店-->
     <insert id="saveShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
-        insert into t_ysy_shop
+        insert into t_sys_shop
         (shop_code,
          shop_name,
          shop_tel,
@@ -65,7 +65,7 @@
         a.update_time updateTime1,
         a.update_user updateUser1,
         a.version
-        from t_ysy_shop a, t_ysy_user b
+        from t_sys_shop a, t_sys_user b
         where a.is_deleted = 0
         and a.user_code = b.user_code
         and b.role = 1
@@ -95,7 +95,7 @@
 
     <!--删除门店-->
     <update id="deleteShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
-        update t_ysy_shop
+        update t_sys_shop
         set
         is_deleted = 1,
         update_time= now(),
@@ -109,7 +109,7 @@
 
     <!--修改门店信息-->
     <update id="updateShop" parameterType="com.xzsd.pc.shop.entity.ShopInfo">
-        update t_ysy_shop
+        update t_sys_shop
         set
             shop_name    = #{shopName},
             shop_tel     = #{shopTel},
@@ -142,7 +142,7 @@
             d.area_name areaName,
             a.shop_address shopAddress,
             version
-        from t_ysy_shop a, t_ysy_area b, t_ysy_area c, t_ysy_area d
+        from t_sys_shop a, t_sys_area b, t_sys_area c, t_sys_area d
         where shop_code = #{shopCode}
         and a.province_code = b.area_code
         and a.city_code = c.area_code

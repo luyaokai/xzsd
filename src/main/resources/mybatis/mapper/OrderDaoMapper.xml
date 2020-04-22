@@ -19,7 +19,7 @@
         a.update_time updateTime1,
         a.update_user updateUser1,
         a.version
-        from t_ysy_orderdetails a, t_ysy_goods b
+        from t_sys_orderdetails a, t_sys_goods b
         where a.is_deleted = 0
         and a.goods_code = b.goods_code
         and a.order_code = #{orderCode}
@@ -42,7 +42,7 @@
         a.update_time updateTime1,
         a.update_user updateUser1,
         a.version
-        from t_ysy_order a, t_ysy_user b
+        from t_sys_order a, t_sys_user b
         where a.is_deleted = 0
         and a.user_code = b.user_code
         <if test="orderCode != null and orderCode != ''">
@@ -71,7 +71,7 @@
 
     <!--修改订单状态-->
     <update id="updateOrderState" parameterType="com.xzsd.pc.order.entity.OrderInfo">
-        update t_ysy_order
+        update t_sys_order
         set
         order_state = #{orderState},
         update_time  = now(),

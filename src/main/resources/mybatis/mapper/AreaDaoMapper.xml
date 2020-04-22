@@ -7,7 +7,7 @@
         select
             area_code areaCode,
             area_name areaName
-        from t_ysy_area
+        from t_sys_area
         where area_father = #{areaCode}
     </select>
 </mapper>
