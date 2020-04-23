@@ -5,7 +5,7 @@
     <!--统计商品是否绑定轮播图-->
     <select id="countSlideshow" parameterType="java.lang.String" resultType="int">
         select count(slideshow_code)
-        from t_ysy_slideshow
+        from t_sys_slideshow
         where is_deleted = 0
         and goods_code = #{goodsCode}
     </select>
@@ -13,14 +13,14 @@
     <!--统计商品是否绑定热门商品-->
     <select id="countHotGoods" parameterType="java.lang.String" resultType="int">
         select count(hotgoods_code)
-        from t_ysy_hotgoods
+        from t_sys_hotgoods
         where is_deleted = 0
         and goods_code = #{goodsCode}
     </select>
 
     <!--新增商品-->
     <insert id="saveGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
-        insert into t_ysy_goods
+        insert into t_sys_goods
         (goods_code,
          goods_name,
          pricing,
@@ -98,7 +98,7 @@
         a.update_user updateUser1,
         a.update_time updateTime1,
         a.version
-        from t_ysy_goods a, t_ysy_goodsclassify b,t_ysy_goodsclassify c
+        from t_sys_goods a, t_sys_goodsclassify b,t_sys_goodsclassify c
         where a.is_deleted = 0
         and a.first_code = b.classify_code
         and a.second_code = c.classify_code
@@ -122,7 +122,7 @@
 
     <!--删除商品-->
     <update id="deleteGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
-        update t_ysy_goods
+        update t_sys_goods
         set
             is_deleted = 1,
             update_time= now(),
@@ -136,7 +136,7 @@
 
     <!--修改商品信息-->
     <update id="updateGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
-        update t_ysy_goods
+        update t_sys_goods
         set
             goods_name   = #{goodsName},
             pricing      = #{pricing},
@@ -182,7 +182,7 @@
             a.goods_introduce goodsIntroduce,
             a.goods_isbn goodsIsbn,
             a.version
-        from t_ysy_goods a,t_ysy_goodsclassify b, t_ysy_goodsclassify c
+        from t_sys_goods a,t_sys_goodsclassify b, t_sys_goodsclassify c
         where a.goods_code = #{goodsCode}
         and a.first_code = b.classify_code
         and a.second_code = c.classify_code
@@ -200,14 +200,14 @@
             update_user updateUser1,
             update_time updateTime1,
             version
-        from t_ysy_goodsclassify
+        from t_sys_goodsclassify
         where is_deleted = 0
         and classify_father = #{classifyCode}
     </select>
 
     <!--修改商品状态-->
     <update id="updateGoodsState" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
-        update t_ysy_goods
+        update t_sys_goods
         set
             goods_state = #{goodsState},
             update_time  = now(),

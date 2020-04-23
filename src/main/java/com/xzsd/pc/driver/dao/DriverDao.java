@@ -32,7 +32,7 @@ public interface DriverDao {
     /**
      * 获取所有司机信息
      * @param driverInfoVO 司机信息
-     * @param userId 登陆人
+     *
      * @return 该地区所有司机信息
      */
     List<DriverInfoVO> listDriverByPage(DriverInfoVO driverInfoVO);

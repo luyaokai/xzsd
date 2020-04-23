@@ -5,7 +5,7 @@
     <!--统计轮播图商品编号数量-->
     <select id="countGoodsCode" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo" resultType="int">
         select count(goods_code)
-        from t_ysy_slideshow
+        from t_sys_slideshow
         where is_deleted = 0
         and goods_code = #{goodsCode}
     </select>
@@ -13,14 +13,14 @@
     <!--统计轮播图商品序号数量-->
     <select id="countSlideshowSort" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo" resultType="int">
         select count(slideshow_sort)
-        from t_ysy_slideshow
+        from t_sys_slideshow
         where is_deleted = 0
         and slideshow_sort = #{slideshowSort}
     </select>
 
     <!--新增轮播图-->
     <insert id="saveSlideshow" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
-        insert into t_ysy_slideshow
+        insert into t_sys_slideshow
         (slideshow_code,
          slideshow_state,
          work_time,
@@ -65,7 +65,7 @@
         update_time updateTime1,
         update_user updateUser1,
         version
-        from t_ysy_slideshow
+        from t_sys_slideshow
         where is_deleted = 0
         <if test="slideshowState != null and slideshowState != ''">
             and slideshow_state = #{slideshowState}
@@ -75,7 +75,7 @@
 
     <!--删除轮播图-->
     <update id="deleteSlideshow" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
-        update t_ysy_slideshow
+        update t_sys_slideshow
         set
             is_deleted = 1,
             update_time= now(),
@@ -89,7 +89,7 @@
 
     <!--修改轮播图状态-->
     <update id="updateSlideshowState" parameterType="com.xzsd.pc.slideshow.entity.SlideshowInfo">
-        update t_ysy_slideshow
+        update t_sys_slideshow
         set
             slideshow_state = #{slideshowState},
             update_time  = now(),
@@ -112,7 +112,7 @@
             goods_code goodsCode,
             inmage_path imagePath,
             version
-        from t_ysy_slideshow
+        from t_sys_slideshow
         where slideshow_code = #{slideshowCode}
         and is_deleted = 0
     </select>
@@ -131,7 +131,7 @@
         a.update_user updateUser1,
         a.update_time updateTime1,
         a.version
-        from t_ysy_goods a, t_ysy_goodsclassify b,t_ysy_goodsclassify c
+        from t_sys_goods a, t_sys_goodsclassify b,t_sys_goodsclassify c
         where a.is_deleted = 0
         and a.first_code = b.classify_code
         and a.second_code = c.classify_code

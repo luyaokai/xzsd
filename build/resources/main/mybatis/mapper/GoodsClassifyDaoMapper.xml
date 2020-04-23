@@ -5,7 +5,7 @@
     <!--统计对应一级分类下二级商品分类数量-->
     <select id="countSecondClassify" parameterType="java.lang.String" resultType="int">
         select count(classify_code)
-        from t_ysy_goodsclassify
+        from t_sys_goodsclassify
         where is_deleted = 0
         and classify_father = #{classifyCode}
     </select>
@@ -13,14 +13,14 @@
     <!--统计对应二级分类下商品数量-->
     <select id="countGoods" parameterType="java.lang.String" resultType="int">
         select count(goods_code)
-        from t_ysy_goods
+        from t_sys_goods
         where is_deleted = 0
         and second_code = #{classifyCode}
     </select>
 
     <!--新增商品分类-->
     <insert id="saveGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
-        insert into t_ysy_goodsclassify
+        insert into t_sys_goodsclassify
         (classify_code,
          classify_name,
          classify_father,
@@ -46,7 +46,7 @@
 
     <!--删除商品分类-->
     <update id="deleteGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
-        update t_ysy_goodsclassify
+        update t_sys_goodsclassify
         set
             is_deleted = 1,
             update_time= now(),
@@ -60,7 +60,7 @@
 
     <!--修改用户信息-->
     <update id="updateGoodsClassify" parameterType="com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo">
-        update t_ysy_goodsclassify
+        update t_sys_goodsclassify
         set
             classify_name    = #{classifyName},
             classify_father  = #{classifyFather},
@@ -80,7 +80,7 @@
             classify_father  classifyFather,
             classify_comment classifyComment,
             version
-        from t_ysy_goodsclassify
+        from t_sys_goodsclassify
         where classify_code = #{classifyCode}
         and is_deleted = 0
     </select>
@@ -94,7 +94,7 @@
         b.classify_code classifyCode1,
         b.classify_name classifyName1,
         b.version version1
-        from t_ysy_goodsclassify a left join t_ysy_goodsclassify b
+        from t_sys_goodsclassify a left join t_sys_goodsclassify b
         on a.classify_code = b.classify_father
         and b.is_deleted = 0
         where a.is_deleted = 0
