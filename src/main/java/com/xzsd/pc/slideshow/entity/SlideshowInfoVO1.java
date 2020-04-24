@@ -34,13 +34,13 @@ public class SlideshowInfoVO1 {
     /**
      * 商品状态 0在售，1已下架，2未发布
      */
-    private int goodsState;
+    private String goodsState;
 
-    public int getGoodsState() {
+    public String getGoodsState() {
         return goodsState;
     }
 
-    public void setGoodsState(int goodsState) {
+    public void setGoodsState(String goodsState) {
         this.goodsState = goodsState;
     }
 

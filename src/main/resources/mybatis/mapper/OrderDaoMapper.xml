@@ -8,20 +8,20 @@
         a.user_code userCode,
         a.order_code orderCode,
         a.goods_code goodsCode,
-        b.goods_name goods_name,
+        b.goods_name goodsName,
         a.buy_sum   buySum,
         a.orderdetails_cost orderDetailsCost,
         b.sell_price sellPrice,
-        b.pricing  pricing,
-        a.is_deleted isDeleted,
-        a.create_time createTime1,
-        a.create_user createUser1,
-        a.update_time updateTime1,
-        a.update_user updateUser1,
-        a.version
-        from t_sys_orderdetails a, t_sys_goods b
+        b.pricing  pricing
+--         a.is_deleted isDeleted,
+--         a.create_time createTime1,
+--         a.create_user createUser1,
+--         a.update_time updateTime1,
+--         a.update_user updateUser1,
+--         a.version
+        from t_sys_orderdetails a
+        left join t_sys_goods b on a.goods_code = b.goods_code
         where a.is_deleted = 0
-        and a.goods_code = b.goods_code
         and a.order_code = #{orderCode}
         order by a.create_time desc
     </select>

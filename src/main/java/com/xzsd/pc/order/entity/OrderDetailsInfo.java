@@ -37,7 +37,7 @@ public class OrderDetailsInfo {
     /**
      * 购买数量
      */
-    private String bugSum;
+    private int buySum;
     /**
      * 订单详情总金额
      */
@@ -63,9 +63,9 @@ public class OrderDetailsInfo {
 
     public void setOrderDetailsCost(String orderDetailsCost) {this.orderDetailsCost = orderDetailsCost;}
 
-    public String getBugSum() {return bugSum; }
+    public int getBuySum() {return buySum; }
 
-    public void setBugSum(String bugSum) {this.bugSum = bugSum; }
+    public void setBuySum(int buySum) {this.buySum = buySum; }
 
     public String getGoodsName() {return goodsName; }
 
