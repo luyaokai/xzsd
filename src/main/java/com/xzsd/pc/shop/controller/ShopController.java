@@ -3,9 +3,6 @@ package com.xzsd.pc.shop.controller;
 import com.xzsd.pc.shop.entity.ShopInfo;
 import com.xzsd.pc.shop.entity.ShopInfoVO;
 import com.xzsd.pc.shop.service.ShopService;
-import com.xzsd.pc.user.controller.DemoController;
-import com.xzsd.pc.user.entity.UserInfo;
-import com.xzsd.pc.user.entity.UserInfoVO;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -24,7 +21,7 @@ import javax.annotation.Resource;
 @RequestMapping("/shop")
 public class ShopController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
 
     @Resource
     private ShopService shopService;

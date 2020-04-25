@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @RequestMapping("/order")
 public class OrderController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Resource
     private OrderService orderService;

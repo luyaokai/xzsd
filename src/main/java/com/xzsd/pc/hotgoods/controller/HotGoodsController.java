@@ -4,10 +4,6 @@ import com.xzsd.pc.hotgoods.entity.HotGoodsInfo;
 import com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO;
 import com.xzsd.pc.hotgoods.entity.HotGoodsInfoVO1;
 import com.xzsd.pc.hotgoods.service.HotGoodsService;
-import com.xzsd.pc.slideshow.entity.SlideshowInfo;
-import com.xzsd.pc.slideshow.entity.SlideshowInfoVO;
-import com.xzsd.pc.user.controller.DemoController;
-import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -18,11 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * @author caiuifeng
+ * @date 2020-04-17
+ */
 @RestController
 @RequestMapping("/hotgoods")
 public class HotGoodsController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HotGoodsController.class);
 
     @Resource
     private HotGoodsService hotGoodsService;

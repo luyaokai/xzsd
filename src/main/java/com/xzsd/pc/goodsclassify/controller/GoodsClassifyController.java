@@ -3,7 +3,6 @@ package com.xzsd.pc.goodsclassify.controller;
 import com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfo;
 import com.xzsd.pc.goodsclassify.entity.GoodsClassifyInfoVo;
 import com.xzsd.pc.goodsclassify.service.GoodsClassifyService;
-import com.xzsd.pc.user.controller.DemoController;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ import javax.annotation.Resource;
 @RequestMapping("/goodsclassify")
 public class GoodsClassifyController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(GoodsClassifyController.class);
 
     @Resource
     private GoodsClassifyService goodsClassifyService;

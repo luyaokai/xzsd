@@ -1,7 +1,6 @@
 package com.xzsd.pc.topOfColumn.contoller;
 
 import com.xzsd.pc.topOfColumn.service.TopOfColumnService;
-import com.xzsd.pc.user.controller.DemoController;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import javax.annotation.Resource;
 @RequestMapping("/topOfColumn")
 public class TopOfColumnController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TopOfColumnController.class);
 
     @Resource
     private TopOfColumnService topOfColumnService;

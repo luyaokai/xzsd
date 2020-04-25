@@ -4,7 +4,6 @@ import com.xzsd.pc.slideshow.entity.SlideshowInfo;
 import com.xzsd.pc.slideshow.entity.SlideshowInfoVO;
 import com.xzsd.pc.slideshow.entity.SlideshowInfoVO1;
 import com.xzsd.pc.slideshow.service.SlideshowService;
-import com.xzsd.pc.user.controller.DemoController;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -23,7 +22,7 @@ import javax.annotation.Resource;
 @RequestMapping("/slideshow")
 public class SlideshowController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SlideshowController.class);
 
     @Resource
     private SlideshowService slideshowService;

@@ -3,9 +3,6 @@ package com.xzsd.pc.driver.controller;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverInfoVO;
 import com.xzsd.pc.driver.service.DriverService;
-import com.xzsd.pc.user.controller.DemoController;
-import com.xzsd.pc.user.entity.UserInfo;
-import com.xzsd.pc.user.entity.UserInfoVO;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -24,7 +21,7 @@ import javax.annotation.Resource;
 @RequestMapping("/driver")
 public class DriverController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
 
     @Resource
     private DriverService driverService;

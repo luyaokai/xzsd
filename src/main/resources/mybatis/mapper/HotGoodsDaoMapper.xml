@@ -75,7 +75,7 @@
         order by a.hotgoods_sort asc
     </select>
 
-    <!--删除轮播图-->
+    <!--删除热门商品-->
     <update id="deleteHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
         update t_sys_hotgoods
         set

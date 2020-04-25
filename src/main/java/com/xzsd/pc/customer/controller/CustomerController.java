@@ -2,7 +2,6 @@ package com.xzsd.pc.customer.controller;
 
 import com.xzsd.pc.customer.entity.CustomerInfo;
 import com.xzsd.pc.customer.service.CustomerService;
-import com.xzsd.pc.user.controller.DemoController;
 import com.xzsd.pc.util.AppResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ import javax.annotation.Resource;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     @Resource
     private CustomerService customerService;

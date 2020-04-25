@@ -1,12 +1,7 @@
 package com.xzsd.pc.menu.controller;
 
 import com.xzsd.pc.menu.entity.MenuInfo;
-import com.xzsd.pc.menu.entity.MenuInfoVO;
 import com.xzsd.pc.menu.service.MenuService;
-import com.xzsd.pc.user.controller.DemoController;
-import com.xzsd.pc.user.entity.UserInfo;
-import com.xzsd.pc.user.entity.UserInfoVO;
-import com.xzsd.pc.user.service.DemoService;
 import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.AuthUtils;
 import org.slf4j.Logger;
@@ -25,7 +20,7 @@ import javax.annotation.Resource;
 @RequestMapping("/menu")
 public class MenuController {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
     @Resource
     private MenuService menuService;
